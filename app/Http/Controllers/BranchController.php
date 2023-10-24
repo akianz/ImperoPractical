@@ -181,7 +181,7 @@ class BranchController extends Controller
                     }
                 }
                 else{
-                    return '<span class="badge badge-danger">Today Close</span>';
+                    return '<span class="badge badge-danger">Close</span>';
                 }
              })
 
