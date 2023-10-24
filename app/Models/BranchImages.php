@@ -12,4 +12,5 @@ class BranchImages extends Model
         'branch_id',
         'image',
     ];
+
 }

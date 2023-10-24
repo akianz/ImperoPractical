@@ -20,5 +20,9 @@ Route::get('/', function () {
 });
 
 Route::resource('business', BusinessController::class);
+Route::get('business_data', [BusinessController::class,'anydata'])->name('business.data');
 Route::resource('branch', BranchController::class);
 Route::get('branch_data', [BranchController::class,'anydata'])->name('branch.data');
+Route::get('branch-time/{id}', [BranchController::class,'show_timing'])->name('branch.show_timing');
+Route::get('branch-time-data/{id}', [BranchController::class,'branch_timing_list'])->name('branch_timing_list');
+Route::get('branch_timing', [BranchController::class,'branch_timing_list'])->name('branch.timing');

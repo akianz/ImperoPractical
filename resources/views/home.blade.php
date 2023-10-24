@@ -20,10 +20,12 @@
             {{ session('success') }}
         </div>
     @endif
+    <div class="success_popup">
+    </div>
     </head>
     <body class="antialiased">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Impero</a>
+            <a class="navbar-brand" href="{{ url('/') }}">Impero</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,16 +50,16 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <h5> Branch List</h5>
+                    <h5> Business List</h5>
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <table class="table data-table">
                         <thead>
                             <tr>
-                            <th scope="col">Branch Name</th>
-                            <th scope="col">Day</th>
-                            <th scope="col">Stat time</th>
-                            <th scope="col">End Time</th>
-                            <th scope="col">Opening Status</th>
+                            <th scope="col">Business Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,18 +83,45 @@
              $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('branch.data') }}",
+                ajax: "{{ route('business.data') }}",
                 method: "GET",
                 columns: [
                     // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'name', name: 'name'},
-                    {data: 'week_day', name: 'week_day'},
-                    {data: 'start_time', name: 'start_time'},
-                    {data: 'end_time', name: 'end_time'},
-                    {data: 'opening_status', name: 'opening_status'},
+                    {data: 'email', name: 'email'},
+                    {data: 'phone', name: 'phone'},
+                    {data: 'logo', name: 'logo',searchable:false,orderable:false},
+                    {data: 'action', name: 'action',searchable:false,orderable:false},
                 ],order: [],
             });
           });
+          $(document).on("click",".delete_business",function(){
+                var dataUrl = $(this).attr("data-url");
+                var confirmation = window.confirm("Are you sure you want to delete this business?");
+                if (confirmation) {
+                    $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    url: dataUrl,
+                    type: "DELETE",
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.success){
+                            $(document).find(".success_popup").after(`<div class="alert alert-success">${data.message}</div>`);
+                            $('.data-table').DataTable().ajax.reload();
+                        }else{
+                            $(document).find(".success_popup").append(`<div class="alert alert-danger">${data.message}</div>`);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText +' ' + xhr.responseText);
+                    },
+                });
+                }else{
+                    return false;
+                }
+          })
         </script>
     </body>
 </html>

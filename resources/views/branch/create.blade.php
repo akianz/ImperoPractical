@@ -3,6 +3,9 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <body>
 <h2>Create Branch</h2>
 <form action="{{ route('branch.store') }}" method="post" enctype="multipart/form-data">
@@ -23,78 +26,128 @@
         </span>
     @endif
 </div>
+    <div>
+        <div class="form-group">
+            <label for="">Name </label>
+            <input type="text" class="form-control"  name="name"  placeholder="Enter Name" value="{{old('name')}}" maxlength="250">
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <span  style="color: red;" class='validate'>{{ $errors->first('name') }}</span>
+                </span>
+            @endif
+        </div>
+        <div class="form-group">
+            <label for="">Images </label>
+            <input type="file" name="images[]" class="form-control" multiple>
+            @if ($errors->has('images'))
+                <span class="help-block">
+                    <span  style="color: red;" class='validate'>{{ $errors->first('images') }}</span>
+                </span>
+            @endif
+        </div>
+    </div>
+    <div>
+        <div class="form-group" style="position: relative; display:flex;">
+            <label for="">Monday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Monday][start_time][]" class="">
+                    <input type="time" name="week[Monday][end_time][]" class="">
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Monday][opening_status]" >
+            </div>
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for=""> Tuesday</label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Tuesday][start_time][]">
+                    <input type="time" name="week[Tuesday][end_time][]" >
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Tuesday][opening_status]" >
+            </div>
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for="">Wednesday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Wednesday][start_time][]">
+                    <input type="time" name="week[Wednesday][end_time][]">
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Wednesday][opening_status]" >
+            </div>
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for="">thursday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Thursday][start_time][]">
+                    <input type="time" name="week[Thursday][end_time][]">
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Thursday][opening_status]" >
+            </div>
 
-</div class="form-group">
-    <label for="">Name </label>
-    <input type="text" class="form-control"  name="name"  placeholder="Enter Name" value="{{old('name')}}" maxlength="250">
-    @if ($errors->has('name'))
-        <span class="help-block">
-            <span  style="color: red;" class='validate'>{{ $errors->first('name') }}</span>
-        </span>
-    @endif
-  </div>
-  <div class="form-group">
-    <label for="">Images </label>
-    <input type="file" name="images[]" class="form-control" multiple>
-    @if ($errors->has('images'))
-        <span class="help-block">
-            <span  style="color: red;" class='validate'>{{ $errors->first('images') }}</span>
-        </span>
-    @endif
-  </div>
-    <div class="form-group" style="position: relative">
-        <label for="">Monday </label>
-        <input type="text" name="week[Monday][start_time]" class="start_time">
-        <input type="text" name="week[Monday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Monday][opening_status]" >
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for="">friday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Friday][start_time][]" >
+                    <input type="time" name="week[Friday][end_time][]" >
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Friday][opening_status]" >
+            </div>
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for="">saturday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Saturday][start_time][]" class="start_time">
+                    <input type="time" name="week[Saturday][end_time][]" class="end_time">
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Saturday][opening_status]" >
+            </div>
+        </div>
+        <div class="form-group" style="position: relative;display:flex;">
+            <label for="">sunday </label>
+            <div class="main_section">
+                <div class="timer_div">
+                    <input type="time" name="week[Sunday][start_time][]" class="start_time">
+                    <input type="time" name="week[Sunday][end_time][]" class="end_time">
+                </div>
+            </div>
+            <div class="plus_div">
+                <a class="add_times"><i class="fa fa-plus"></i></a>
+                <label for="">open/close </label>
+                <input type="checkbox" name="week[Sunday][opening_status]" >
+            </div>
+        </div>
     </div>
-    <div class="form-group" style="position: relative">
-        <label for=""> Tuesday</label>
-        <input type="text" name="week[Tuesday][start_time]" class="start_time">
-        <input type="text" name="week[Tuesday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Tuesday][opening_status]" >
-    </div>
-    <div class="form-group" style="position: relative">
-        <label for="">wednesday </label>
-        <input type="text" name="week[Wednesday][start_time]" class="start_time">
-        <input type="text" name="week[Wednesday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Wednesday][opening_status]" >
-    </div>
-    <div class="form-group" style="position: relative">
-        <label for="">thursday </label>
-        <input type="text" name="week[Thursday][start_time]" class="start_time">
-        <input type="text" name="week[Thursday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Thursday][opening_status]" >
-
-    </div>
-    <div class="form-group" style="position: relative">
-        <label for="">friday </label>
-        <input type="text" name="week[Friday][start_time]" class="start_time">
-        <input type="text" name="week[Friday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Friday][opening_status]" >
-
-    </div>
-    <div class="form-group" style="position: relative">
-        <label for="">saturday </label>
-        <input type="text" name="week[Saturday][start_time]" class="start_time">
-        <input type="text" name="week[Saturday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Saturday][opening_status]" >
-
-    </div>
-    <div class="form-group" style="position: relative">
-        <label for="">sunday </label>
-        <input type="text" name="week[Sunday][start_time]" class="start_time">
-        <input type="text" name="week[Sunday][end_time]" class="end_time">
-        <label for="">open/close </label>
-        <input type="checkbox" name="week[Sunday][opening_status]" >
-    </div>
-  <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
 
 </body>
@@ -106,9 +159,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
 </script>
 <script>
-    $('.start_time , .end_time').datetimepicker({
-            format: 'hh:mm a'
-    });
+    $(document).on("click",".add_times",function(){
+        var html = `<div class="timer_div"><input type="time" name="week[Monday][start_time][]" class="">
+                <input type="time" name="week[Monday][end_time][]" class=""></div>`;
+        $(this).parent().parent().find(".main_section").append(html);
+    })
 
 </script>
 </html>

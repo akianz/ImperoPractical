@@ -12,5 +12,7 @@ class BusinessBranch extends Model
         'business_id',
         'name',
     ];
-
+    public function branchImages(){
+        return $this->hasMany(BranchImages::class,'branch_id','id');
+    }
 }
